@@ -16,7 +16,7 @@ class MainViewModel : BaseViewModel() {
     private val _result = MutableSharedFlow<Int>()
     val result = _result.asSharedFlow()
 
-    var count = 0
+    private var count = 0
 
     fun getResult() {
         viewModelScope.launch {

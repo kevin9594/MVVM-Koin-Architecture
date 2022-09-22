@@ -3,7 +3,9 @@ package com.mka.base
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.reflect.ParameterizedType
 
@@ -25,7 +27,16 @@ abstract class BaseActivity<VM : BaseViewModel, VB : ViewBinding> : AppCompatAct
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        initShareFlow()
     }
+
+    private fun initShareFlow(){
+        lifecycleScope.launch {
+            shareFlowCollect()
+        }
+    }
+
+    abstract suspend fun shareFlowCollect()
 
 }
 
